@@ -1,5 +1,6 @@
 plugins {
-    id("java")
+    application
+    alias(libs.plugins.lombok)
 }
 
 group = "io.allitov"
@@ -9,10 +10,23 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
+application {
+    mainClass.set("io.allitov.Main")
+}
+
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:6.0.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation(libs.log4j.slf4j)
+
+    testImplementation(libs.assertj)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.launcher)
 }
 
 tasks.test {
