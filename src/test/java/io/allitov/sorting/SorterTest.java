@@ -18,6 +18,22 @@ class SorterTest {
         assertThat(input).containsExactly(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource("provideArraysForSorting")
+    void selectionSort(int[] input, int[] expected) {
+        Sorter.selectionSort(input);
+
+        assertThat(input).containsExactly(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideArraysForSorting")
+    void mergeSort(int[] input, int[] expected) {
+        Sorter.mergeSort(input);
+
+        assertThat(input).containsExactly(expected);
+    }
+
     private static Stream<Arguments> provideArraysForSorting() {
         return Stream.of(
                 Arguments.of(
